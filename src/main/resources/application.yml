@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: caixasugestoes
+server:
+  port: 9000
