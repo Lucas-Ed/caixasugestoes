@@ -49,7 +49,7 @@ public class CategoriasResource {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void excluir(@PathVariable Long id) {
+    public void excluir(@PathVariable Long id) throws RecursoNaoLocalizadoException {
         categoriaService.excluir(id);
     }
 

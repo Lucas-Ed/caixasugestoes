@@ -28,7 +28,8 @@ public class CategoriaService {
         return modelMapper.map(entitySaved, CategoriaDTO.class);
     }
 
-    public void excluir(Long id) {
+    public void excluir(Long id) throws RecursoNaoLocalizadoException {
+        buscarPorId(id);
         repository.deleteById(id);
     }
 
