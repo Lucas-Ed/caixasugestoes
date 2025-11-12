@@ -32,10 +32,15 @@ public class CategoriaService {
         repository.deleteById(id);
     }
 
-    public List<CategoriaDTO> listar() {
-        return repository.findAll().stream()
+    public List<CategoriaDTO> listar() throws RecursoNaoLocalizadoException {
+        List<CategoriaDTO> categorias = repository.findAll().stream()
                 .map(entity -> modelMapper.map(entity, CategoriaDTO.class))
                 .collect(Collectors.toList());
+
+        if (categorias.isEmpty()) {
+            throw new RecursoNaoLocalizadoException("Categorias nao encontradas");
+        }
+        return categorias;
     }
 
     public CategoriaDTO buscarPorId(Long id) throws RecursoNaoLocalizadoException {

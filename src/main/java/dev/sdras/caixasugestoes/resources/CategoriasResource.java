@@ -1,7 +1,12 @@
 package dev.sdras.caixasugestoes.resources;
 
+import dev.sdras.caixasugestoes.config.exception.RecursoNaoLocalizadoException;
 import dev.sdras.caixasugestoes.domain.dtos.CategoriaDTO;
 import dev.sdras.caixasugestoes.services.CategoriaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@Tag(name = "Categorias", description = "Categorias das sugestões")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/categorias")
@@ -36,15 +42,26 @@ public class CategoriasResource {
         }
     }
 
+    @Operation(summary = "Exclui categoria existente")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Categoria excluida com sucesso"),
+        @ApiResponse(responseCode = "404", description = "Categoria não localizada")
+    })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void excluir(@PathVariable Long id) {
         categoriaService.excluir(id);
     }
 
+    @Operation(summary = "Listar todas as categorias")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", 
+                description = "Categorias listadas com sucesso"),
+            @ApiResponse(responseCode = "404", 
+                description = "Categorias não localizadas") })
     @GetMapping
-    public List<CategoriaDTO> getCategorias() {
+    public List<CategoriaDTO> getCategorias() throws RecursoNaoLocalizadoException {
         return categoriaService.listar();
     }
-    
+
 }
