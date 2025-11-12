@@ -3,22 +3,23 @@ package dev.sdras.caixasugestoes.resources;
 import dev.sdras.caixasugestoes.domain.dtos.CategoriaDTO;
 import dev.sdras.caixasugestoes.services.CategoriaService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.GetMapping;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/categorias")
 public class CategoriasResource {
 
     private final CategoriaService categoriaService;
-
-    public CategoriasResource(CategoriaService categoriaService) {
-        this.categoriaService = categoriaService;
-    }
 
     @PostMapping
     public ResponseEntity<?> criar(@Valid @RequestBody CategoriaDTO dto) {
@@ -40,4 +41,10 @@ public class CategoriasResource {
     public void excluir(@PathVariable Long id) {
         categoriaService.excluir(id);
     }
+
+    @GetMapping
+    public List<CategoriaDTO> getCategorias() {
+        return categoriaService.listar();
+    }
+    
 }
