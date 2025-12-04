@@ -24,6 +24,8 @@ public class GlobalExceptionHandler {
                 .body(new ApiError(request, HttpStatus.NOT_FOUND, ex.getMessage()));
     }
 
+    //TODO: Criar exceção customizada para validação de regra de negócio (RegraDeNegocioException), por exemplo, não pode haver remover uma categoria que possua sugestões associadas.
+
     @ExceptionHandler({ MethodArgumentNotValidException.class, RegraDeNegocioException.class })
     public ResponseEntity<ApiError> methodArgumentNotValidException(Exception ex,
             HttpServletRequest request,

@@ -64,4 +64,8 @@ public class CategoriasResource {
         return categoriaService.listar();
     }
 
+    //TODO: Criar end-point para atualização de categórias
+
+    //TODO: Criar end-point para busca de categorias por id
+
 }
