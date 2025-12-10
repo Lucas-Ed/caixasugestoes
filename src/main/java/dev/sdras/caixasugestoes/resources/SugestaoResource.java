@@ -60,5 +60,5 @@ public class SugestaoResource {
 
     //TODO: Criar end-point para busca de sugestões por id incluindo a documentação em Swagger
 
-    //TODO: Criar end-point excluir sugestão validando se a categoria está associada a alguma sugestão, caso esteja, não permitir a exclusão lançando uma RegraDeNegocioException, inclua também a documentação em Swagger
+    //TODO: Criar end-point excluir sugestão, inclua também a documentação em Swagger
 }

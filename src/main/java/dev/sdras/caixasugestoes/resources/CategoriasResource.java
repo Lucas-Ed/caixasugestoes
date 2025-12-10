@@ -17,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Tag(name = "Categorias", description = "Categorias das sugestões")
 @RequiredArgsConstructor
@@ -68,4 +67,5 @@ public class CategoriasResource {
 
     //TODO: Criar end-point para busca de categorias por id
 
+    //TODO: Criar end-point excluir categoria validando se a categoria está associada a alguma sugestão, caso esteja, não permitir a exclusão lançando uma RegraDeNegocioException, inclua também a documentação em Swagger
 }
