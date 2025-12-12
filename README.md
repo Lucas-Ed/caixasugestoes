@@ -76,7 +76,7 @@ O projeto possui um arquivo de testes pronto:
 src/main/resources/api.http
 ```
 
-Esse arquivo pode ser utilizado com o **VS Code REST Client** para testar todas as rotas da API, conforme demonstrado no anexo.
+Esse arquivo pode ser utilizado com o **VS Code REST Client** para testar todas as rotas da API.
 
 ---
 
