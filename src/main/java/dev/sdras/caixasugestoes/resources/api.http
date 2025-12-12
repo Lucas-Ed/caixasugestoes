@@ -4,24 +4,8 @@ Accept: application/json
 
 ###
 
-### CRIAR CATEGORIA
-POST http://localhost:9000/categorias
-Content-Type: application/json
-
-{
-  "nome": "Categoria de Exemplo"
-}
-
-###
-
-### LISTAR CATEGORIAS
-GET http://localhost:9000/categorias
-Accept: application/json
-
-###
-
-### DELETAR CATEGORIA POR ID
-DELETE http://localhost:9000/categorias/1
+### LISTAR SUGESTÃO POR ID
+GET http://localhost:9000/sugestoes/1
 Accept: application/json
 
 ###
@@ -33,12 +17,59 @@ Content-Type: application/json
 {
   "titulo": "Título da sugestão",
   "descricao": "Descrição legal",
-  "categoriaId": 1
+  "autor": "Fulano da Silva",
+  "categoria": {
+    "id": 1,
+    "descricao": "Categoria de Exemplo"
+  }
+}
+###
+
+### DELETAR SUGESTÃO POR ID
+DELETE http://localhost:9000/sugestoes/1
+Accept: application/json
+
+###
+
+### CRIAR CATEGORIA
+POST http://localhost:9000/categorias
+Content-Type: application/json
+
+{
+  "descricao": "Categoria de Exemplo"
 }
 
 ###
 
-### PLAYGROUND - HELLO COM NOME (ex.: João)
+### LISTAR CATEGORIAS
+GET http://localhost:9000/categorias
+Accept: application/json
+
+###
+
+### BUSCAR CATEGORIA POR ID
+GET http://localhost:9000/categorias/1
+Accept: application/json
+
+###
+
+### ATUALIZAR CATEGORIA POR ID
+PUT http://localhost:9000/categorias/1
+Content-Type: application/json
+
+{
+  "descricao": "Categoria Atualizada"
+}
+
+###
+
+### DELETAR CATEGORIA POR ID
+DELETE http://localhost:9000/categorias/1
+Accept: application/json
+
+###
+
+### PLAYGROUND - HELLO
 GET http://localhost:9000/playground/hello/Joao
 Accept: text/plain
 

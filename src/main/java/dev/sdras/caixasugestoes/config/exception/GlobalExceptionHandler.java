@@ -14,9 +14,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler
-    public ResponseEntity<ApiError> entityNotFoundException(RecursoNaoLocalizadoException ex,
+
+    @ExceptionHandler(RecursoNaoLocalizadoException.class)
+    public ResponseEntity<ApiError> entityNotFoundException(
+            RecursoNaoLocalizadoException ex,
             HttpServletRequest request) {
+
         log.error("Api Error - ", ex);
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
@@ -24,16 +27,23 @@ public class GlobalExceptionHandler {
                 .body(new ApiError(request, HttpStatus.NOT_FOUND, ex.getMessage()));
     }
 
-    //TODO: Criar exceção customizada para validação de regra de negócio (RegraDeNegocioException), por exemplo, não pode haver remover uma categoria que possua sugestões associadas.
-
+    //  Tratamento central para regras de negócio e validação
     @ExceptionHandler({ MethodArgumentNotValidException.class, RegraDeNegocioException.class })
-    public ResponseEntity<ApiError> methodArgumentNotValidException(Exception ex,
-            HttpServletRequest request,
-            BindingResult result) {
+    public ResponseEntity<ApiError> methodArgumentNotValidException(
+            Exception ex,
+            HttpServletRequest request) {
+
         log.error("Api Error - ", ex);
+
+        BindingResult result = null;
+        if (ex instanceof MethodArgumentNotValidException manve) {
+            result = manve.getBindingResult();
+        }
+
         return ResponseEntity
                 .status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new ApiError(request, HttpStatus.UNPROCESSABLE_ENTITY, "Campo(s) invalido(s)", result));
+                .body(new ApiError(request, HttpStatus.UNPROCESSABLE_ENTITY,
+                        ex.getMessage(), result));
     }
 }

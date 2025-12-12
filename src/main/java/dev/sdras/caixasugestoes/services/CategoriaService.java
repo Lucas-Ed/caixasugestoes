@@ -1,54 +1,66 @@
 package dev.sdras.caixasugestoes.services;
 
-import dev.sdras.caixasugestoes.config.exception.RecursoNaoLocalizadoException;
-import dev.sdras.caixasugestoes.domain.CategoriaEntity;
-import dev.sdras.caixasugestoes.domain.dtos.CategoriaDTO;
-import dev.sdras.caixasugestoes.respositories.CategoriaRepository;
-
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import dev.sdras.caixasugestoes.config.exception.RegraDeNegocioException;
+import dev.sdras.caixasugestoes.config.exception.RecursoNaoLocalizadoException;
+import dev.sdras.caixasugestoes.domain.CategoriaEntity;
+import dev.sdras.caixasugestoes.domain.dtos.CategoriaDTO;
+import dev.sdras.caixasugestoes.respositories.CategoriaRepository;
+import dev.sdras.caixasugestoes.respositories.SugestaoRepository;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class CategoriaService {
-    private final CategoriaRepository repository;
-    private final ModelMapper modelMapper;
 
-    public CategoriaService(CategoriaRepository repository, ModelMapper modelMapper) {
-        this.repository = repository;
-        this.modelMapper = modelMapper;
-    }
+    private final CategoriaRepository repository;
+    private final SugestaoRepository sugestaoRepository;
+    private final ModelMapper modelMapper;
 
     public CategoriaDTO salvar(CategoriaDTO dto) {
         CategoriaEntity entity = modelMapper.map(dto, CategoriaEntity.class);
-        var entitySaved = repository.save(entity);
-        return modelMapper.map(entitySaved, CategoriaDTO.class);
+        CategoriaEntity saved = repository.save(entity);
+        return modelMapper.map(saved, CategoriaDTO.class);
     }
 
-    public void excluir(Long id) throws RecursoNaoLocalizadoException {
-        buscarPorId(id);
-        repository.deleteById(id);
-    }
-
-    public List<CategoriaDTO> listar() throws RecursoNaoLocalizadoException {
-        List<CategoriaDTO> categorias = repository.findAll().stream()
+    public List<CategoriaDTO> listar() {
+        return repository.findAll().stream()
                 .map(entity -> modelMapper.map(entity, CategoriaDTO.class))
                 .collect(Collectors.toList());
-
-        if (categorias.isEmpty()) {
-            throw new RecursoNaoLocalizadoException("Categorias nao encontradas");
-        }
-        return categorias;
     }
 
-    public CategoriaDTO buscarPorId(Long id) throws RecursoNaoLocalizadoException {
-        Optional<CategoriaEntity> entity = repository.findById(id);
-        if (entity.isEmpty()) {
-            throw new RecursoNaoLocalizadoException("Categoria nao encontrada");
+    public CategoriaDTO buscarPorId(Long id) {
+        CategoriaEntity categoria = repository.findById(id)
+                .orElseThrow(() -> new RecursoNaoLocalizadoException("Categoria não encontrada"));
+        return modelMapper.map(categoria, CategoriaDTO.class);
+    }
+
+
+    public CategoriaDTO atualizar(Long id, CategoriaDTO dto) {
+        CategoriaEntity categoria = repository.findById(id)
+                .orElseThrow(() -> new RecursoNaoLocalizadoException("Categoria não encontrada"));
+
+        categoria.setDescricao(dto.getDescricao());
+
+        repository.save(categoria);
+        return modelMapper.map(categoria, CategoriaDTO.class);
+    }
+
+    public void excluir(Long id) {
+
+        CategoriaEntity categoria = repository.findById(id)
+                .orElseThrow(() -> new RecursoNaoLocalizadoException("Categoria não encontrada"));
+
+        long qtd = sugestaoRepository.countByCategoriaId(id);
+        if (qtd > 0) {
+            throw new RegraDeNegocioException("Categoria possui sugestões associadas e não pode ser removida.");
         }
-        return modelMapper.map(entity.get(), CategoriaDTO.class);
+
+        repository.delete(categoria);
     }
 }

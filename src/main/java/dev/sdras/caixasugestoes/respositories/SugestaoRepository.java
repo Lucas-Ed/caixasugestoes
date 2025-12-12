@@ -7,4 +7,6 @@ import dev.sdras.caixasugestoes.domain.SugestaoEntity;
 
 @Repository
 public interface SugestaoRepository extends JpaRepository<SugestaoEntity, Long> {
+
+    long countByCategoriaId(Long categoriaId);
 }

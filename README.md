@@ -1,74 +1,84 @@
-# API de Caixa de Sugestões -- API Spring Boot - Fatec Araras
+# 📦 API de Caixa de Sugestões  
+### API REST — Spring Boot 3.5.7 | Fatec Araras
 
-Este projeto é uma API REST desenvolvida em **Spring Boot 3.5.7** para
-gerenciar sugestões e categorias, incluindo funcionalidades de CRUD,
-validações, tratamento global de exceções e documentação automática com
-**Springdoc OpenAPI**.
+Este projeto é uma **API REST desenvolvida em Spring Boot 3.5.7 (Java 17)** para gerenciamento de **Categorias** e **Sugestões**, aplicando boas práticas de arquitetura, validações, regras de negócio, tratamento global de exceções e **documentação automática com Springdoc OpenAPI (Swagger)**.
 
-------------------------------------------------------------------------
+---
+### 📊 Status do Projeto
+<!-- ![Status](https://img.shields.io/badge/status-em%20andamento-yellow) -->
+<h3 align="center">✅ Concluído ✅</h3>
+<!-- <h3 align="center">🚧🚧 Em construção!  👷 🧱🚧</h3> -->
+
+
+## 🖼️ Visão Geral dos Endpoints
+
+A imagem abaixo apresenta **todos os endpoints disponíveis na API**.
+
+🔗 **Imagem dos Endpoints:**  
+
+![](img/api.png)
+
+---
 
 ## 🚀 Funcionalidades
 
--   CRUD de **Categorias**
--   CRUD de **Sugestões**
--   Validações com *Jakarta Validation*
--   Tratamento global de erros via **GlobalExceptionHandler**
--   Exceção customizada: `RegraDeNegocioException`
--   Documentação automática via **Swagger / OpenAPI**
--   Log automático de rotas (`EndpointLogger`)
--   Banco em memória **H2** (ambiente local)
+- CRUD completo de **Categorias**
+- CRUD completo de **Sugestões**
+- Tratamento global de exceções (`GlobalExceptionHandler`)
+- Regra de negócio com `RegraDeNegocioException`
+- Documentação automática com **Swagger / OpenAPI**
+- Log automático de rotas (`EndpointLogger`)
+- Endpoints de playground
+- Test com RestClient
 
-------------------------------------------------------------------------
+---
 
 ## 📦 Tecnologias Utilizadas
 
--   Java 17
--   Spring Boot 3.5.7
--   Spring Web
--   Spring Data JPA
--   Spring Validation
--   Springdoc OpenAPI
--   Lombok
--   ModelMapper
--   H2 Database
--   MySQL Driver
--   Gradle (com *gradlew wrapper*)
+- Java 17
+- Spring Boot 3.5.7
+- Gradle (Wrapper)
 
-------------------------------------------------------------------------
+---
 
-## ▶️ Como Rodar o Projeto
+## ▶️ Como Executar
 
-``` bash
+```bash
 ./gradlew bootRun
 ```
 
-A API iniciará em:
+A aplicação iniciará em:
 
-    http://localhost:9000
+```
+http://localhost:9000
+```
 
-------------------------------------------------------------------------
+---
 
 ## 📄 Documentação da API
 
-Após iniciar a aplicação:
+- Swagger UI  
+  http://localhost:9000/openapi/swagger-ui.html
 
--   Swagger UI:\
-    `http://localhost:9000/openapi/swagger-ui.html`
+- OpenAPI JSON  
+  http://localhost:9000/openapi/v3/api-docs
 
--   OpenAPI JSON:\
-    `http://localhost:9000/openapi/v3/api-docs`
+- OpenAPI YAML  
+  http://localhost:9000/openapi/v3/api-docs.yaml
 
--   OpenAPI YAML:\
-    `http://localhost:9000/openapi/v3/api-docs.yaml`
-
-------------------------------------------------------------------------
+---
 
 ## 🧪 Testes das Rotas
 
-Um arquivo `./main/.../resources/api.http` foi criado para uso com o **VS Code REST Client**
-permitindo testar rapidamente todas as rotas da API.
+O projeto possui um arquivo de testes pronto:
 
-------------------------------------------------------------------------
+```
+src/main/resources/api.http
+```
+
+Esse arquivo pode ser utilizado com o **VS Code REST Client** para testar todas as rotas da API, conforme demonstrado no anexo.
+
+---
 
 ## 📁 Estrutura do Projeto
 
@@ -83,37 +93,31 @@ permitindo testar rapidamente todas as rotas da API.
      │    └── 📄 RegraDeNegocioException.java
      └── 📄 CaixasugestoesApplication.java
 
-------------------------------------------------------------------------
+---
 
 ## ⚠️ Regras de Negócio
 
--   Não é permitido excluir uma categoria que ainda possui sugestões
-    associadas.
--   Essa regra lança `RegraDeNegocioException`.
+- Não é permitido excluir uma categoria com sugestões associadas
+- Essa regra lança `RegraDeNegocioException`
 
-------------------------------------------------------------------------
+---
 
-## 🛠 Construção e Empacotamento
+## 🛠 Build
 
-Gerar JAR final:
-
-``` bash
+```bash
 ./gradlew build
 ```
 
-JAR será criado em:
+O JAR será gerado em:
 
-    build/libs/
+```
+build/libs/
+```
 
-------------------------------------------------------------------------
-
-## 🙋 Sobre
-
-Projeto criado como parte de estudo acadêmico e demonstração de arquitetura REST
-com Spring Boot.
-
-------------------------------------------------------------------------
+---
 
 ## 📜 Licença
 
-Este projeto é distribuído sob licença MIT.
+MIT License
+
+### 💚 Feito com dedicação JAVA e café ☕
