@@ -41,3 +41,9 @@ api:
       name: Esdras B Silva
       url: github.com/f290DSM
       email: esdras.silva9@fatec.sp.gov.br
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "mappings"

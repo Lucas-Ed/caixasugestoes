@@ -1,0 +1,75 @@
+### LISTAR SUGESTÕES
+GET http://localhost:9000/sugestoes
+Accept: application/json
+
+###
+
+### CRIAR CATEGORIA
+POST http://localhost:9000/categorias
+Content-Type: application/json
+
+{
+  "nome": "Categoria de Exemplo"
+}
+
+###
+
+### LISTAR CATEGORIAS
+GET http://localhost:9000/categorias
+Accept: application/json
+
+###
+
+### DELETAR CATEGORIA POR ID
+DELETE http://localhost:9000/categorias/1
+Accept: application/json
+
+###
+
+### CRIAR SUGESTÃO
+POST http://localhost:9000/sugestoes
+Content-Type: application/json
+
+{
+  "titulo": "Título da sugestão",
+  "descricao": "Descrição legal",
+  "categoriaId": 1
+}
+
+###
+
+### PLAYGROUND - HELLO COM NOME (ex.: João)
+GET http://localhost:9000/playground/hello/Joao
+Accept: text/plain
+
+###
+
+### PLAYGROUND - CALCULADORA / SOMAR
+GET http://localhost:9000/playground/calculadora/somar?a=2&b=3
+Accept: application/json
+
+###
+
+### SWAGGER UI
+GET http://localhost:9000/openapi/swagger-ui.html
+Accept: text/html
+
+###
+
+### OPENAPI JSON
+GET http://localhost:9000/openapi/v3/api-docs
+Accept: application/json
+
+###
+
+### OPENAPI YAML
+GET http://localhost:9000/openapi/v3/api-docs.yaml
+Accept: application/x-yaml
+
+###
+
+### SWAGGER CONFIG
+GET http://localhost:9000/openapi/v3/api-docs/swagger-config
+Accept: application/json
+
+###
