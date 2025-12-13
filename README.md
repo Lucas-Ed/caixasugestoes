@@ -76,7 +76,7 @@ O projeto possui um arquivo de testes pronto:
 src/test/test.http
 ```
 
-Esse arquivo deve ser executado com a extensão  ![**VS Code REST Client**](https://marketplace.visualstudio.com/items?itemName=humao.rest-client), instalada, para testar todas as rotas da API.
+Esse arquivo deve ser executado com a extensão  [**VS Code REST Client**](https://marketplace.visualstudio.com/items?itemName=humao.rest-client), instalada, para testar todas as rotas da API.
 
 Como executar os testes ?
 
