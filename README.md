@@ -73,25 +73,77 @@ http://localhost:9000
 O projeto possui um arquivo de testes pronto:
 
 ```
-src/main/resources/api.http
+src/test/test.http
 ```
+
+Esse arquivo deve ser executado com a extensão  ![**VS Code REST Client**](https://marketplace.visualstudio.com/items?itemName=humao.rest-client), instalada, para testar todas as rotas da API.
+
+Como executar os testes ?
+
+Abra o arquivo `test.http` no VS Code e clique em "Send Request", no endpoint que deseja testar.
+
+Exemplo:
+
+![](img/test.JPG)
 
 Esse arquivo pode ser utilizado com o **VS Code REST Client** para testar todas as rotas da API.
 
 ---
 
 ## 📁 Estrutura do Projeto
-
-    📁 src/main/java/..../caixasugestoes/
-     ├── 📄 categorias/
-     ├── 📄 sugestoes/
-     ├── 📄 playground/
-     ├── 📄 config/
-     │    └── EndpointLogger.java
-     ├── 📄 exceptions/
-     │    ├── 📄 GlobalExceptionHandler.java
-     │    └── 📄 RegraDeNegocioException.java
-     └── 📄 CaixasugestoesApplication.java
+```bash
+📁 caixasugestoes/
+        ├─ 📁 src/
+        │  ├─ 📁 main/
+        │  │  ├─  📁 java/
+        │  │  │  └─ 📁 dev/
+        │  │  │     └─ 📁 sdras/
+        │  │  │        └─ 📁 caixasugestoes/
+        │  │  │           ├─ 📁 config/
+        │  │  │           │  ├─  📁 exception/
+        │  │  │           │  │  ├─ 📄 ApiError.java
+        │  │  │           │  │  ├─ 📄 GlobalExceptionHandler.java
+        │  │  │           │  │  ├─ 📄 RecursoNaoLocalizadoException.java
+        │  │  │           │  │  └─ 📄 RegraDeNegocioException.java
+        │  │  │           │  ├─ 📄 AppConfig.java
+        │  │  │           │  └─ 📄 EndpointLogger.java # Arquivo que lista os endpoints no terminal.
+        │  │  │           ├─  📁domain/
+        │  │  │           │  ├─ 📁 dtos/
+        │  │  │           │  │  ├─ 📄 CategoriaDTO.java
+        │  │  │           │  │  └─ 📄 SugestaoDTO.java
+        │  │  │           │  ├─ 📄 CategoriaEntity.java
+        │  │  │           │  └─ 📄 SugestaoEntity.java
+        │  │  │           ├─ 📁 resources/
+        │  │  │           │  ├─ 📄 CategoriasResource.java
+        │  │  │           │  ├─ 📄 PlaygroundController.java
+        │  │  │           │  └─ 📄 SugestaoResource.java
+        │  │  │           ├─ 📁 respositories/
+        │  │  │           │  ├─ 📄 CategoriaRepository.java
+        │  │  │           │  └─ 📄 SugestaoRepository.java
+        │  │  │           ├─  📁 services/
+        │  │  │           │  ├─ 📄 CategoriaService.java
+        │  │  │           │  └─ 📄 SugestaoService.java
+        │  │  │           └─ 📄 CaixasugestoesApplication.java
+        │  │  └─ 📁 resources/
+        │  │     └─  📄 application.yml
+        │  └─ 📁 test/
+        │     ├─ 📁 java/
+        │     │  └─ 📁 dev/
+        │     │     └─ 📁 sdras/
+        │     │        └─ 📁 caixasugestoes/
+        │     │           ├─ 📁 services/
+        │     │           │  └─  📄 CategoriaServiceTest.java
+        │     │           └─ 📄 CaixasugestoesApplicationTests.java
+        │     └─  📄 test.http  # Arquivo de tests dos endpoints.
+        ├─ 📄.gitattributes
+        ├─ 📄.gitignore
+        ├─ 📄bash.exe.stackdump
+        ├─ 📄build.gradle
+        ├─ 📄gradlew
+        ├─ 📄gradlew.bat
+        ├─ 📄README.md
+        └─ 📄settings.gradle
+```
 
 ---
 
